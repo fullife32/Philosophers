@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_time.c                                         :+:      :+:    :+:   */
+/*   atol.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/02 15:06:58 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/02 15:52:04 by eassouli         ###   ########.fr       */
+/*   Created: 2021/12/02 16:41:44 by eassouli          #+#    #+#             */
+/*   Updated: 2021/12/02 16:42:45 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int get_time(struct timeval start, int ms)
+long	ft_atol(const char *str)
 {
-	// struct timeval new_time;
-	(void)start;
-	(void)ms;
+	int		i;
+	long	nb;
+	int		sign;
 
-	// gettimeofday(&new_time, NULL);
-	// usleep(ms);
-	// while (end.tv_sec - start.tv_sec + 1e-6*(end.tv_usec - start.tv_usec) <) {
-		// gettimeofday(&end, NULL); // microsleep pour liberer un peu le proco
-	// }
-	// printf("%0.8f\n", end.tv_sec - start.tv_sec + 1e-6*(end.tv_usec - start.tv_usec));
-
-	return (0);
+	i = 0;
+	nb = 0;
+	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
+		i++;
+	sign = 1;
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = nb * 10 + (str[i] - '0');
+		if (nb < 0 && sign == 1)
+			return (-1);
+		else if (nb < 0 && sign != 1)
+			return (0);
+		i++;
+	}
+	return (sign * nb);
 }

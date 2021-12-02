@@ -6,7 +6,7 @@
 #    By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/12/02 15:26:29 by eassouli         ###   ########.fr        #
+#    Updated: 2021/12/02 18:03:22 by eassouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,14 @@ OBJ_DIR =	obj/
 INC_DIR =	includes/
 SRC_DIR =	$(shell find srcs -type d)
 
-SRC		= 	get_time.c
+SRC		= 	philo.c \
+			check_args.c \
+			create_philo_list.c \
+			create_and_join_threads.c \
+			get_time.c \
+			no_time_to_die.c \
+			atol.c \
+			error.c
 
 OBJ 	=	$(addprefix $(OBJ_DIR),$(SRC:%.c=%.o))
 HEADERS = 	$(foreach dir, $(INC_DIR), $(wildcard $(dir)/*.h))
@@ -34,7 +41,7 @@ vpath %.h $(foreach dir, $(INC_DIR)/, $(dir):)
 
 CC 		=	gcc
 
-CFLAG 	= 	-Wall -Wextra -Werror
+CFLAG 	= 	-Wall -Wextra -Werror -pthread
 IFLAG 	= 	$(foreach dir, $(INC_DIR), -I $(dir))
 
 # ----------------- #

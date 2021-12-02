@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_time.c                                         :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/02 15:06:58 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/02 15:52:04 by eassouli         ###   ########.fr       */
+/*   Created: 2021/12/02 18:00:39 by eassouli          #+#    #+#             */
+/*   Updated: 2021/12/02 18:00:53 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int get_time(struct timeval start, int ms)
+int	print_error(void)
 {
-	// struct timeval new_time;
-	(void)start;
-	(void)ms;
-
-	// gettimeofday(&new_time, NULL);
-	// usleep(ms);
-	// while (end.tv_sec - start.tv_sec + 1e-6*(end.tv_usec - start.tv_usec) <) {
-		// gettimeofday(&end, NULL); // microsleep pour liberer un peu le proco
-	// }
-	// printf("%0.8f\n", end.tv_sec - start.tv_sec + 1e-6*(end.tv_usec - start.tv_usec));
-
-	return (0);
+	printf("Usage: ./philo number_of_philosophers > 0 time_to_die (ms)");
+	printf(" time_to_eat (ms) time_to_sleep (ms)");
+	printf(" [number_of_times_each_philosopher_must_eat]\n");
+	return (1);
 }
+
