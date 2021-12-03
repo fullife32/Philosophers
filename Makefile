@@ -6,7 +6,7 @@
 #    By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/12/02 18:03:22 by eassouli         ###   ########.fr        #
+#    Updated: 2021/12/03 15:59:19 by eassouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC		= 	philo.c \
 			check_args.c \
 			create_philo_list.c \
 			create_and_join_threads.c \
+			philo_actions.c \
 			get_time.c \
 			no_time_to_die.c \
 			atol.c \

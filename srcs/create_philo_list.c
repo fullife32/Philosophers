@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:06:55 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/02 17:36:42 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/03 16:14:58 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@ t_philo	*malloc_philo(char **av)
 	philo->die_time = ft_atol(av[2]);
 	philo->eat_time = ft_atol(av[3]);
 	philo->sleep_time = ft_atol(av[4]);
+	philo->feast = -1;
 	if (av[5])
 		philo->feast = ft_atol(av[5]);
 	philo->fork_used = 0;
 	pthread_mutex_init(&philo->mutex, NULL); // secure
 	philo->next = NULL;
+	philo->first = NULL;
 	return (philo);
 }
 
@@ -70,5 +72,6 @@ t_philo	*malloc_list(char **av)
 		}
 		philo = philo->next;
 	}
+	philo->first = first;
 	return (first);
 }
