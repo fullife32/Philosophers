@@ -6,28 +6,30 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:06:58 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/03 17:45:30 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:51:11 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-float	time_in_sec(struct timeval time)
-{
-	float	time_sec;
+// long long	time_in_sec(struct timeval time)
+// {
+// 	long long	time_sec;
 
-	time_sec = (float)time.tv_sec + 1e-6 * (float)time.tv_usec;
-	return (time_sec);
-}
+// 	time_sec = (float)time.tv_sec + (float)time.tv_usec * 1000 * 1000;
+// 	return (time_sec);
+// }
 
-float	get_time(void)
+long long	get_time(void)
 {
 	struct timeval	time;
+	long long	time_sec;
 
 	time.tv_sec = 0;
 	time.tv_usec = 0;
 	gettimeofday(&time, NULL); //secure ?
-	return (time_in_sec(time));
+	time_sec = time.tv_sec / 1000 + time.tv_usec * 1000;
+	return (time_sec);
 }
 
 void	yousleep(int time_to_sleep, t_philo *philo)
@@ -55,19 +57,3 @@ void	is_dead(t_philo *philo)
 		exit (1);
 	}
 }
-
-// int get_time()
-// {
-// 	// struct timeval new_time;
-// 	(void)start;
-// 	(void)ms;
-
-// 	gettimeofday(&new_time, NULL);
-// 	usleep(ms);
-// 	while (end.tv_sec - start.tv_sec + 1e-6*(end.tv_usec - start.tv_usec) <) {
-// 		gettimeofday(&end, NULL); // microsleep pour liberer un peu le proco
-// 	}
-// 	printf("%0.8f\n", end.tv_sec - start.tv_sec + 1e-6*(end.tv_usec - start.tv_usec));
-
-// 	return (0);
-// }

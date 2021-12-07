@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:19:05 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/03 17:34:45 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:50:32 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ typedef struct s_philo
 	int				id;
 	int				die_time;
 	int				eat_time;
-	float			last_feast;
+	long long		last_feast;
 	int				sleep_time;
 	// int				think_time;
 	int				feast;
 	int				fork_used;
-	float			start_time;
+	long long		start_time;
 	pthread_mutex_t	mutex;
 	pthread_t		thread;
 	struct s_philo	*next;
@@ -81,7 +81,7 @@ void		*routine(void *list);
 
 void		print_state(int action, t_philo *philo);
 
-float		get_time(void);
+long long		get_time(void);
 float		time_in_sec(struct timeval time);
 void		yousleep(int time_to_sleep, t_philo *philo);
 void		is_dead(t_philo *philo);
