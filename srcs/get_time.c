@@ -6,54 +6,59 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:06:58 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/07 14:51:11 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:48:40 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// long long	time_in_sec(struct timeval time)
-// {
-// 	long long	time_sec;
-
-// 	time_sec = (float)time.tv_sec + (float)time.tv_usec * 1000 * 1000;
-// 	return (time_sec);
-// }
-
 long long	get_time(void)
 {
 	struct timeval	time;
-	long long	time_sec;
 
-	time.tv_sec = 0;
-	time.tv_usec = 0;
 	gettimeofday(&time, NULL); //secure ?
-	time_sec = time.tv_sec / 1000 + time.tv_usec * 1000;
-	return (time_sec);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
 void	yousleep(int time_to_sleep, t_philo *philo)
 {
-	float	end_time;
+	long long	actual;
+	long long	end;
 
-	end_time = get_time();
-	end_time += (float)time_to_sleep;
-	while (end_time < get_time()) // <= ?
-		is_dead(philo);
-	// usleep leger pour alleger le proco d'apres lylian
+	actual = get_time();
+	end = get_time() + time_to_sleep;
+	while (actual < end)
+	{
+		if (philo->share->die_time == 0)
+			exit (0);
+		usleep(time_to_sleep); // check si mort exit
+		actual = get_time();
+	}
 }
 
-void	is_dead(t_philo *philo)
+void	is_dead(t_philo *first) // appel dans le parent
 {
-	float	time;
-	float	die_time_sec;
+	t_philo		*philo;
+	t_share		*share;
+	long long	time;
+	int			feast;
 
-	time = get_time();
-	die_time_sec = (float)philo->die_time / 1000;
-	if (philo->last_feast + die_time_sec > time
-		&& philo->start_time + die_time_sec > time)
+	share = first->share;
+	feast = -1;
+	while (feast != 0)
 	{
-		print_state(DIE, philo);
-		exit (1);
+		feast = 0;
+		philo = first;
+		while (philo)
+		{
+			time = get_time();
+			if (time > philo->last_feast + share->die_time)
+			{
+				print_state(DIE, philo);
+				return ;
+			}
+			feast = philo->feast;
+			philo = philo->next;
+		}
 	}
 }

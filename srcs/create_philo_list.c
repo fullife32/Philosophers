@@ -6,11 +6,26 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:06:55 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/03 16:14:58 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:33:08 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+t_share	get_shared_values(char **av)
+{
+	t_share	share;
+
+	share.die_time = ft_atol(av[2]);
+	share.eat_time = ft_atol(av[3]);
+	share.sleep_time = ft_atol(av[4]);
+	if (av[5])
+	{
+		if (ft_atol(av[5]) == 0) // trouver une autre solution
+			exit (0);
+	}
+	return (share);
+}
 
 void	free_philo(t_philo **first)
 {
@@ -36,9 +51,6 @@ t_philo	*malloc_philo(char **av)
 	if (philo == NULL)
 		return (NULL);
 	philo->id = id++;
-	philo->die_time = ft_atol(av[2]);
-	philo->eat_time = ft_atol(av[3]);
-	philo->sleep_time = ft_atol(av[4]);
 	philo->feast = -1;
 	if (av[5])
 		philo->feast = ft_atol(av[5]);

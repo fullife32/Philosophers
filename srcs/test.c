@@ -9,7 +9,8 @@ void	*routine(void *truc)
 	gettimeofday(&start, NULL);
 	gettimeofday(&end, NULL);
 	// usleep(ms);
-	while (end.tv_sec - start.tv_sec + 1e-6*(end.tv_usec - start.tv_usec) <= 0.001)
+	printf("%d %d\n", start.tv_sec, start.tv_usec);
+	while ((end.tv_sec - start.tv_sec) * 1e-3 + 1e-3*(end.tv_usec - start.tv_usec) <= 100) // changer 100 par nombre a patienter
 	{
 		usleep(100);
 		gettimeofday(&end, NULL);
@@ -17,7 +18,7 @@ void	*routine(void *truc)
 	}
 		gettimeofday(&end, NULL); // microsleep pour liberer un peu le proco
 	// }
-	printf("%0.4f\n", end.tv_sec - start.tv_sec + 1e-6*(end.tv_usec - start.tv_usec));
+	printf("%f\n", (end.tv_sec - start.tv_sec) * 1e-3 + 1e-6*(end.tv_usec - start.tv_usec));
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:19:05 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/07 14:50:32 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:45:43 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,21 @@
 ** Structures
 */
 
-typedef struct s_philo
+typedef struct	s_share
 {
-	int				id;
 	int				die_time;
 	int				eat_time;
-	long long		last_feast;
 	int				sleep_time;
-	// int				think_time;
-	int				feast;
-	int				fork_used;
 	long long		start_time;
+}				t_share;
+
+typedef struct	s_philo
+{
+	int				id;
+	int				feast;
+	long long		last_feast;
+	int				fork_used;
+	t_share			*share;
 	pthread_mutex_t	mutex;
 	pthread_t		thread;
 	struct s_philo	*next;
@@ -71,20 +75,22 @@ int			av_is_onlynum(int ac, char **av);
 
 long		ft_atol(const char *str);
 
+t_share		get_shared_values(char **av);
 t_philo		*malloc_list(char **av);
 t_philo		*malloc_philo(char **av);
 void		free_philo(t_philo **first);
 
-int			start_threads(t_philo *first);
+int			start_threads(t_philo *first, t_share *share);
+int			join_threads(t_philo *first);
 
 void		*routine(void *list);
+void		philo_eats(t_philo *philo);
 
 void		print_state(int action, t_philo *philo);
 
-long long		get_time(void);
-float		time_in_sec(struct timeval time);
+long long	get_time(void);
 void		yousleep(int time_to_sleep, t_philo *philo);
-void		is_dead(t_philo *philo);
+void		is_dead(t_philo *first);
 
 int			print_error(void);
 
