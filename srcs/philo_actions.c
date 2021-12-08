@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 15:32:44 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/08 20:06:09 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/08 20:11:45 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_state(int action, t_philo *philo)
 		"died"};
 	long long	time;
 
-	pthread_mutex_lock(&philo->mutex);
+	pthread_mutex_lock(&philo->mutex); // unlock all mutex at the end if die to unlock loop
 	time = get_time() - philo->share->start_time;
 	if (action == DIE)
 		philo->share->die_time = 0;
