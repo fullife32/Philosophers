@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:39:03 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 18:55:29 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:31:06 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	start_philosophers(t_philo *philo, t_share *share)
 		perror("create_threads");
 		return ;
 	}
-	is_dead(philo, share); // check si philo est mort et mettre value a 1 pour faire exit les autres et qu'ils ne puissent plus ecrire
+	is_dead(philo, share);
 	join_threads(philo);
 	if (status == EXIT_FAILURE)
 	{
