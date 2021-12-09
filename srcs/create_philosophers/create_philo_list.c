@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:06:55 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 18:56:29 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:27:49 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_philo	*malloc_philo(char **av)
 	philo->feast = -1;
 	if (av[5])
 		philo->feast = ft_atol(av[5]);
-	philo->fork_used = 0;
 	pthread_mutex_init(&philo->mutex, NULL); // secure
 	philo->next = NULL;
 	philo->first = NULL;

@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:19:05 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 18:59:18 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:27:35 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct	s_philo
 	int				id;
 	int				feast;
 	long long		last_feast;
-	int				fork_used;
 	t_share			*share;
 	pthread_mutex_t	mutex;
 	pthread_t		thread;
@@ -80,6 +79,10 @@ t_philo		*malloc_list(char **av, t_share *share);
 int			create_threads(t_philo *first, t_share *share);
 int			join_threads(t_philo *first);
 
+long long	get_time(void);
+
+void		yousleep(int time_to_sleep, t_philo *philo);
+
 void		is_dead(t_philo *first, t_share *share);
 
 void		*routine(void *list);
@@ -87,9 +90,6 @@ void		*routine(void *list);
 void		philo_eats(t_philo *philo);
 
 void		print_state(int action, t_philo *philo);
-
-long long	get_time(void);
-void		yousleep(int time_to_sleep, t_philo *philo);
 
 void		free_philo(t_philo **first, t_share *share);
 

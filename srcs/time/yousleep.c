@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   no_time_to_die.c                                   :+:      :+:    :+:   */
+/*   yousleep.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/02 15:54:53 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 18:52:58 by eassouli         ###   ########.fr       */
+/*   Created: 2021/12/09 19:16:50 by eassouli          #+#    #+#             */
+/*   Updated: 2021/12/09 19:24:28 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	is_dead(t_philo *first, t_share *share) // appel dans le parent
+void	yousleep(int time_to_sleep, t_philo *philo)
 {
-	t_philo		*philo;
-	long long	time;
-	int			feast;
+	long long	actual;
+	long long	end;
+	int			die_time;
 
-	feast = -1;
-	while (feast != 0)
+	actual = get_time();
+	end = get_time() + time_to_sleep;
+	while (actual < end)
 	{
-		feast = 0;
-		philo = first;
-		while (philo)
-		{
-			time = get_time();
-			if (time > philo->last_feast + share->die_time)
-			{
-				print_state(DIE, philo);
-				return ;
-			}
-			feast = philo->feast;
-			philo = philo->next;
-		}
+		pthread_mutex_lock(&philo->share->mutex);
+		die_time = philo->share->die_time;
+		pthread_mutex_unlock(&philo->share->mutex);
+		if (die_time == 0)
+			exit (0);
+		usleep(time_to_sleep); // check si mort exit
+		actual = get_time();
 	}
 }
