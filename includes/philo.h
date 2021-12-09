@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:19:05 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/08 19:45:43 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:59:18 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_share
 	int				eat_time;
 	int				sleep_time;
 	long long		start_time;
+	pthread_mutex_t	mutex;
 }				t_share;
 
 typedef struct	s_philo
@@ -73,25 +74,27 @@ typedef struct	s_philo
 
 int			av_is_onlynum(int ac, char **av);
 
-long		ft_atol(const char *str);
-
 t_share		get_shared_values(char **av);
-t_philo		*malloc_list(char **av);
-t_philo		*malloc_philo(char **av);
-void		free_philo(t_philo **first);
+t_philo		*malloc_list(char **av, t_share *share);
 
-int			start_threads(t_philo *first, t_share *share);
+int			create_threads(t_philo *first, t_share *share);
 int			join_threads(t_philo *first);
 
+void		is_dead(t_philo *first, t_share *share);
+
 void		*routine(void *list);
+
 void		philo_eats(t_philo *philo);
 
 void		print_state(int action, t_philo *philo);
 
 long long	get_time(void);
 void		yousleep(int time_to_sleep, t_philo *philo);
-void		is_dead(t_philo *first);
+
+void		free_philo(t_philo **first, t_share *share);
 
 int			print_error(void);
+
+long		ft_atol(const char *str);
 
 #endif

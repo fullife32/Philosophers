@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   no_time_to_die.c                                   :+:      :+:    :+:   */
+/*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/02 15:54:53 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 18:52:58 by eassouli         ###   ########.fr       */
+/*   Created: 2021/12/03 15:32:44 by eassouli          #+#    #+#             */
+/*   Updated: 2021/12/09 18:49:43 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	is_dead(t_philo *first, t_share *share) // appel dans le parent
+void	philo_sleeps(t_philo *philo)
 {
-	t_philo		*philo;
-	long long	time;
-	int			feast;
+	print_state(SLEEP, philo);
+	yousleep(philo->share->sleep_time, philo);
+}
 
-	feast = -1;
-	while (feast != 0)
+void	*routine(void *list)
+{
+	while (((t_philo *)list)->feast != 0)
 	{
-		feast = 0;
-		philo = first;
-		while (philo)
-		{
-			time = get_time();
-			if (time > philo->last_feast + share->die_time)
-			{
-				print_state(DIE, philo);
-				return ;
-			}
-			feast = philo->feast;
-			philo = philo->next;
-		}
+		philo_eats((t_philo *)list);
+		philo_sleeps(((t_philo *)list));
+		print_state(THINK, (t_philo *)list);
+		if (((t_philo *)list)->feast > 0)
+			((t_philo *)list)->feast--;
 	}
+	return (NULL);
 }

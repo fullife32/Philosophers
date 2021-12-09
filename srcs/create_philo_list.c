@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:06:55 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/08 19:33:08 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:56:29 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,8 @@ t_share	get_shared_values(char **av)
 		if (ft_atol(av[5]) == 0) // trouver une autre solution
 			exit (0);
 	}
+	pthread_mutex_init(&share.mutex, NULL);
 	return (share);
-}
-
-void	free_philo(t_philo **first)
-{
-	t_philo	*philo;
-	t_philo	*save_next;
-
-	philo = *first;
-	while (philo)
-	{
-		save_next = philo->next;
-		pthread_mutex_destroy(&philo->mutex);
-		free(philo);
-		philo = save_next;
-	}
 }
 
 t_philo	*malloc_philo(char **av)
@@ -61,7 +47,7 @@ t_philo	*malloc_philo(char **av)
 	return (philo);
 }
 
-t_philo	*malloc_list(char **av)
+t_philo	*malloc_list(char **av, t_share *share)
 {
 	int		id;
 	int		nb_of_philo;
@@ -79,7 +65,7 @@ t_philo	*malloc_list(char **av)
 		philo->next = malloc_philo(av);
 		if (philo == NULL)
 		{
-			free_philo(&first);
+			free_philo(&first, share);
 			exit(EXIT_FAILURE);
 		}
 		philo = philo->next;

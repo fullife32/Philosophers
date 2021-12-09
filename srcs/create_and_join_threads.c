@@ -6,13 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:48:56 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/08 19:47:13 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:55:13 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	start_threads(t_philo *first, t_share *share) //secure
+int	create_threads(t_philo *first, t_share *share) //secure
 {
 	t_philo	*philo;
 
