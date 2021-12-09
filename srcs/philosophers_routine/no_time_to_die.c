@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:54:53 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 19:07:14 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/09 20:55:51 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	is_dead(t_philo *first, t_share *share) // appel dans le parent
 		while (philo)
 		{
 			time = get_time();
-			pthread_mutex_lock(&share->mutex);
+			pthread_mutex_lock(&share->eat_mutex);
 			dead_time = philo->last_feast + share->die_time;
-			pthread_mutex_unlock(&share->mutex);
+			pthread_mutex_unlock(&share->eat_mutex);
 			if (time > dead_time)
 			{
 				print_state(DIE, philo);
@@ -38,5 +38,6 @@ void	is_dead(t_philo *first, t_share *share) // appel dans le parent
 			feast = philo->feast;
 			philo = philo->next;
 		}
+		usleep(100); // petit sleep ?
 	}
 }

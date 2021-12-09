@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:06:55 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 19:27:49 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/09 20:31:14 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_share	get_shared_values(char **av)
 		if (ft_atol(av[5]) == 0) // trouver une autre solution
 			exit (0);
 	}
-	pthread_mutex_init(&share.mutex, NULL);
+	pthread_mutex_init(&share.dead_mutex, NULL);
+	pthread_mutex_init(&share.eat_mutex, NULL);
 	return (share);
 }
 

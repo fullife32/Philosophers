@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:48:56 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 18:55:13 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/09 20:50:24 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,28 @@ int	create_threads(t_philo *first, t_share *share) //secure
 	share->start_time = get_time();
 	while (philo)
 	{
-		philo->share = share;
-		philo->last_feast = share->start_time;
-		if (pthread_create(&philo->thread, NULL, &routine, philo) != 0)
-			return (EXIT_FAILURE);
+		if (philo->id % 2 != 0)
+		{
+			philo->share = share;
+			philo->last_feast = share->start_time;
+			if (pthread_create(&philo->thread, NULL, &routine, philo) != 0)
+				return (EXIT_FAILURE);
+		}
 		philo = philo->next;
 	}
 	philo = first;
+	yousleep(1, philo);
+	while (philo)
+	{
+		if (philo->id % 2 == 0)
+		{
+			philo->share = share;
+			philo->last_feast = share->start_time;
+			if (pthread_create(&philo->thread, NULL, &routine, philo) != 0)
+				return (EXIT_FAILURE);
+		}
+		philo = philo->next;
+	}
 	return (EXIT_SUCCESS);
 }
 
