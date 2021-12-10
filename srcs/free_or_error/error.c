@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 18:00:39 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 19:21:05 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:42:13 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	print_error(void)
 {
-	printf("Usage: ./philo number_of_philosophers > 0 time_to_die (ms)");
+	printf("Usage: ./philo number_of_philosophers ( > 0 ) time_to_die (ms)");
 	printf(" time_to_eat (ms) time_to_sleep (ms)");
 	printf(" [number_of_times_each_philosopher_must_eat]\n");
-	return (1);
+	return (EXIT_FAILURE);
 }

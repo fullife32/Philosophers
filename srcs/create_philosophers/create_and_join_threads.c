@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:48:56 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 20:50:24 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:44:27 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	create_threads(t_philo *first, t_share *share) //secure
 		philo = philo->next;
 	}
 	philo = first;
-	yousleep(1, philo);
+	usleep(100); // sleep plus long
 	while (philo)
 	{
 		if (philo->id % 2 == 0)
@@ -52,7 +52,7 @@ int	join_threads(t_philo *first)
 	philo = first;
 	while (philo)
 	{
-		if (pthread_join(philo->thread, NULL) != 0) // ajouter valeur de retour la structure
+		if (pthread_join(philo->thread, NULL) != 0)
 			return (EXIT_FAILURE);
 		philo = philo->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:06:55 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 20:31:14 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:44:56 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,16 @@ t_share	get_shared_values(char **av)
 	share.sleep_time = ft_atol(av[4]);
 	if (av[5])
 	{
-		if (ft_atol(av[5]) == 0) // trouver une autre solution
-			exit (0);
+		if (ft_atol(av[5]) == 0)
+			exit (EXIT_SUCCESS);
 	}
-	pthread_mutex_init(&share.dead_mutex, NULL);
-	pthread_mutex_init(&share.eat_mutex, NULL);
+	if (pthread_mutex_init(&share.dead_mutex, NULL) != 0)
+		exit (EXIT_FAILURE);
+	if (pthread_mutex_init(&share.eat_mutex, NULL) != 0)
+	{
+		pthread_mutex_destroy(&share.dead_mutex);
+		exit (EXIT_FAILURE);
+	}
 	return (share);
 }
 
@@ -41,7 +46,11 @@ t_philo	*malloc_philo(char **av)
 	philo->feast = -1;
 	if (av[5])
 		philo->feast = ft_atol(av[5]);
-	pthread_mutex_init(&philo->mutex, NULL); // secure
+	if (pthread_mutex_init(&philo->mutex, NULL) != 0)
+	{
+		free(philo);
+		return (NULL);
+	}
 	philo->next = NULL;
 	philo->first = NULL;
 	return (philo);

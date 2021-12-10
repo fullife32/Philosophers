@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:39:03 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 19:31:06 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:41:26 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	start_philosophers(t_philo *philo, t_share *share)
 	status = create_threads(philo, share);
 	if (status == EXIT_FAILURE)
 	{
-		perror("create_threads");
+		perror("Failed to create thread");
 		return ;
 	}
 	is_dead(philo, share);
 	join_threads(philo);
 	if (status == EXIT_FAILURE)
 	{
-		perror("join_threads");
+		perror("Failed to join thread");
 		return ;
 	}
 }
@@ -48,7 +48,6 @@ int	main(int ac, char **av)
 		return (print_error());
 	share = get_shared_values(av);
 	philo = malloc_list(av, &share);
-	// printf("passage main\n");
 	start_philosophers(philo, &share);
 	free_philo(&philo, &share);
 	return (EXIT_SUCCESS);

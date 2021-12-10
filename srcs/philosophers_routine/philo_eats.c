@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 18:48:35 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/09 20:54:53 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:42:36 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	philo_alone(t_philo *philo)
 {
 	if (philo->next == NULL && philo->first == philo)
 	{
+		pthread_mutex_unlock(&philo->mutex);
 		yousleep(philo->share->die_time + 60, philo);
 		return (1);
 	}
@@ -49,7 +50,7 @@ void	philo_eats(t_philo *philo)
 		pthread_mutex_lock(&philo->mutex);
 		print_state(FORK, philo);
 		if (philo_alone(philo) == 1)
-			exit(0);
+			exit(EXIT_SUCCESS);
 		pthread_mutex_lock(&philo_two->mutex);
 		print_state(FORK, philo);
 		eat_with_two_forks(philo);
