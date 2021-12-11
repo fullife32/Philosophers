@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 17:06:55 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/10 18:44:56 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/11 11:16:21 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ t_share	get_shared_values(char **av)
 	share.die_time = ft_atol(av[2]);
 	share.eat_time = ft_atol(av[3]);
 	share.sleep_time = ft_atol(av[4]);
+	if (share.die_time == -1 || share.eat_time == -1 || share.sleep_time == -1)
+		exit (print_error());
 	if (av[5])
 	{
 		if (ft_atol(av[5]) == 0)
 			exit (EXIT_SUCCESS);
+		else if (ft_atol(av[5]) == -1)
+			exit (print_error());
 	}
 	if (pthread_mutex_init(&share.dead_mutex, NULL) != 0)
 		exit (EXIT_FAILURE);

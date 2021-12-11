@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 16:41:44 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/02 16:42:45 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/11 11:18:12 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ long	ft_atol(const char *str)
 			return (0);
 		i++;
 	}
+	if (nb > 4294967295 || nb < 0)
+		return (-1);
 	return (sign * nb);
 }

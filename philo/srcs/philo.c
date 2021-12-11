@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:39:03 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/10 18:41:26 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/11 11:05:49 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char **av)
 
 	if (ac < 5 || ac > 6 || av_is_onlynum(ac, av) == 0)
 		return (print_error());
-	if (ft_atol(av[1]) == 0)
+	if (ft_atol(av[1]) <= 0)
 		return (print_error());
 	share = get_shared_values(av);
 	philo = malloc_list(av, &share);
