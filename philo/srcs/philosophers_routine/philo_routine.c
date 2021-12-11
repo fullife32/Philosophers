@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 15:32:44 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/11 10:16:01 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:30:40 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	philo_sleeps(t_philo *philo)
 	yousleep(philo->share->sleep_time, philo);
 }
 
-int		dead_philo(t_share *share)
+int	dead_philo(t_share *share)
 {
 	int	dead;
 
@@ -30,11 +30,24 @@ int		dead_philo(t_share *share)
 	return (0);
 }
 
+int	philo_alone(t_philo *philo)
+{
+	if (philo->next == NULL && philo->first == philo)
+	{
+		print_state(FORK, philo);
+		yousleep(philo->share->die_time + 60, philo);
+		return (1);
+	}
+	return (0);
+}
+
 void	*routine(void *list)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)list;
+	if (philo_alone(philo) == 1)
+		return (NULL);
 	while (dead_philo(philo->share) == 0)
 	{
 		philo_eats(philo);

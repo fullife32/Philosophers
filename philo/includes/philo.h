@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:19:05 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/11 11:01:31 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:17:51 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@
 ** Structures
 */
 
-typedef struct	s_share
+typedef struct s_share
 {
 	long			die_time;
 	long			eat_time;
 	long			sleep_time;
 	long long		start_time;
-	pthread_mutex_t	dead_mutex; // mutex pour print ?
+	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	eat_mutex;
 }				t_share;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int				id;
 	long			feast;

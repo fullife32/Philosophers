@@ -6,13 +6,23 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:54:53 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/11 10:46:49 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:17:07 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	is_dead(t_philo *first, t_share *share) // appel dans le parent
+int	print_die(int time, int dead_time, int feast, t_philo *philo)
+{
+	if (time >= dead_time && feast != 0)
+	{
+		print_state(DIE, philo);
+		return (1);
+	}
+	return (0);
+}
+
+void	is_dead(t_philo *first, t_share *share)
 {
 	t_philo		*philo;
 	long long	time;
@@ -31,13 +41,10 @@ void	is_dead(t_philo *first, t_share *share) // appel dans le parent
 			dead_time = philo->last_feast + share->die_time;
 			feast = philo->feast;
 			pthread_mutex_unlock(&share->eat_mutex);
-			if (time >= dead_time && feast != 0) // > or >=
-			{
-				print_state(DIE, philo);
+			if (print_die(time, dead_time, feast, philo) == 1)
 				return ;
-			}
 			philo = philo->next;
 		}
-		usleep(100); // petit sleep ?
+		usleep(100);
 	}
 }
