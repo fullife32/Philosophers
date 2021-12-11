@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 19:16:50 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/10 18:14:37 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:58:53 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	yousleep(int time_to_sleep, t_philo *philo)
 		pthread_mutex_unlock(&philo->share->dead_mutex);
 		if (die_time == 0)
 			return ;
-		usleep(time_to_sleep);
+		usleep(100);
 		actual = get_time();
 	}
 }
