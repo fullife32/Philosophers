@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 18:48:35 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/11 15:25:57 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:12:30 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	philo_eats(t_philo *philo)
 		print_state(FORK, philo);
 		eat_with_two_forks(philo);
 	}
-	if (philo->id % 2 == 0)
+	else
 	{
 		pthread_mutex_lock(&philo_two->mutex);
 		print_state(FORK, philo);

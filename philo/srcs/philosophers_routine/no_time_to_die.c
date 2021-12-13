@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:54:53 by eassouli          #+#    #+#             */
-/*   Updated: 2021/12/11 15:17:07 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:25:34 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	print_die(int time, int dead_time, int feast, t_philo *philo)
 {
-	if (time >= dead_time && feast != 0)
+	if (time > dead_time && feast != 0)
 	{
 		print_state(DIE, philo);
 		return (1);
