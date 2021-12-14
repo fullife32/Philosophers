@@ -6,7 +6,7 @@
 #    By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/12/09 19:17:55 by eassouli         ###   ########.fr        #
+#    Updated: 2021/12/14 13:54:41 by eassouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,12 +55,12 @@ IFLAG 	= 	$(foreach dir, $(INC_DIR), -I $(dir))
 
 $(OBJ_DIR)%.o: %.c $(HEADERS)
 			@mkdir -p $(OBJ_DIR)
-			@echo "\033[32mCompilation de ... $(foreach file, $< , $(notdir $<))"
+			@echo "\033[32mCompilation of ... $(foreach file, $< , $(notdir $<))"
 			@$(CC) $(CFLAG) $(IFLAG) -o $@ -c $<
 
 $(NAME):	$(OBJ)
 			@$(CC) $(CFLAG) $(IFLAG) $(OBJ) -o $@
-			@echo "\n*     Compilation $(NAME)     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
+			@echo "\n*     $(NAME) compilation     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
 
 all:		$(NAME)
 
